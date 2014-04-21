@@ -23,7 +23,6 @@ public class Main {
 			server.start();
 			System.out.println("[INFO] Server running at http://localhost:" + PORT + CONTEXT);
 			System.out.println("[HINT] Hit Enter to reload the application quickly");
-			System.out.println("d");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(-1);
