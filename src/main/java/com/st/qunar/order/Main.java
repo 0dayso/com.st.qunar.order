@@ -12,7 +12,7 @@ public class Main {
 	// public static final String[] TLD_JAR_NAMES = new String[] { "spring-webmvc", "springside-core" };
 
 	public static void main(String[] args) throws Exception {
-		// 设定Spring的profile
+		// 设定Spring的profile1
 		Profiles.setProfileAsSystemProperty(Profiles.PRODUCTION);
 
 		// 启动Jetty
