@@ -1,0 +1,19 @@
+<result status="ok">
+	<order orderNo="tts130000" id="300" allPrice="2829" noPay="0.0" childPrintPrice="810" childFaceValue="810"
+		source="self" policySource="pl001" ticketMode=" 手工出票" policyFriendly="APP130000" payChannel="ALIPAY" payStatus="null"
+		insuranceUnitPrice="20" backnote="退改签" cabinnote="-" insuranceCuttingPrice="788" viewPrice="810" price="783.0" pnr="JMLBDD"
+		cpnr="" constructionFee="50" fuelTax="110" childFuelTax="50" policyType="普通产品" status="PAY_OK" contact="联系人"
+		contactMob="13700000000" contactEmail="mail@aa.com" createTime="2013-07-25 20:47:03.0" needPS="true" contactTel="13700000000"
+		address="****" company="顺丰快递" expType="普通" ordernumber="001" xcdPrice="20" xcd="行程单" sjr="联系人1" sendtime="2013-07-20">
+		<refund refund_time="2013-08-12 19:23:03" refund_price="1.00" refund_no="TTS130812191324904ct01243000" type="线上退款" />
+		<purchaseOrderInfo price="0.00" issue_ticket_type=" 手工出票" issue_ticket_platform_code=""
+			source_transaction_id="" source_order_no="null" tpp_type="" status=" 支付成功" pay_commercial_no="" offline_pay_type=""
+			offline_pay_cardno="" platform_mem_id="" operator="相菲" refund_price="" />
+		<flight code="MU6837" cabin="E" ccabin="Y" dep="CTU" arr="PVG" depDay="2013-09-16" depTime="17:40" arrTime="20:25"
+			realCode="" />
+		<passenger name="蒋大钧" ageType="0" cardType="NI" price="783.0" priceType="成人" cardNum="310109198308273550"
+			eticketNum="" insuranceCount="1" bxSource="百年 9 / 19 人寿保险股份有限公司" bxName="百年交通工具意外伤害保险" />
+		<insurance insuranceNo="1100001" bxFlight="第一程" bxStatus="已出保险" />
+		<log operator="用户" time="2013-07-25 20:47:04.0" action="将订单由【】修改为【订座成功等待支付】原因为生成订单" />
+	</order>
+</result>

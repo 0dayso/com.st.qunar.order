@@ -16,7 +16,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.test.spring.SpringTransactionalTestCase;
 
 import com.st.qunar.order.entity.Task;
-import com.st.qunar.order.repository.TaskDao;
 
 @ContextConfiguration(locations = { "/applicationContext.xml" })
 public class TaskDaoTest extends SpringTransactionalTestCase {

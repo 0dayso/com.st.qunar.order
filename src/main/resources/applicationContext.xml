@@ -120,8 +120,7 @@
 	<!-- unit test环境 -->
 	<beans profile="test">
 	 	<context:property-placeholder ignore-resource-not-found="true"
-			location="classpath*:/application.properties,
-          			  classpath*:/application.test.properties" />	
+			location="classpath*:/application.properties" />	
 		
 		<!-- Spring Simple连接池 -->
 		<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
