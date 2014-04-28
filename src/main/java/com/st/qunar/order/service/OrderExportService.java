@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springside.modules.mapper.JaxbMapper;
 
 import com.st.qunar.order.entity.Result;
+import com.st.qunar.order.pojo.AccountConfig;
 
 /**
  * @author kxhu
@@ -20,14 +21,6 @@ import com.st.qunar.order.entity.Result;
  */
 @Component
 public class OrderExportService implements Runnable {
-
-	@SuppressWarnings("unused")
-	private static final int TIMEOUT_SECONDS = 20;
-
-	private static final String orderExportUrl = "http://ygz.trade.qunar.com/tts/interface/new/orderexport?";
-	private static final String orderExportIncrParaUserAndPass = "user=ygQunarTtsOrder&pass=K39dKd@8";
-	private static final String orderExportIncrParaType = "type=incr";
-	private static final String orderExportIncrParaLastId = "lastId=";
 
 	private static Logger logger = LoggerFactory.getLogger(OrderExportService.class);
 
@@ -44,12 +37,9 @@ public class OrderExportService implements Runnable {
 		while (true) {
 			try {
 				// 增量导出
-				String reqUrl = orderExportUrl
-						+ orderExportIncrParaUserAndPass
-						+ "&"
-						+ orderExportIncrParaType
-						+ "&"
-						+ orderExportIncrParaLastId
+				String reqUrl = AccountConfig.QUNAR_ORDER_EXPORT_URL
+						+ AccountConfig.QUNAR_ORDER_EXPORT_USER_PASS
+						+ "&type=incr&lastId="
 						+ commonCountService
 								.getCommonCountByTypeName(CommonCountService.COMM_COUNT_QN_ORDER_INCR_EXP_LAS_ID);
 				String exportContent = Request.Post(reqUrl).execute().returnContent().asString();

@@ -70,8 +70,8 @@ public class OrderStatusUpdateInfo {
 	}
 
 	public boolean signAssertSucc() {
-		String beanJsonStr = JsonMapper.nonDefaultMapper().toJson(this);
-		String locSign = MD5.MD5Encode(beanJsonStr + "secCode=" + "");
+		String beanJsonStr = JsonMapper.nonDefaultMapper().toJson(this.getData());
+		String locSign = MD5.MD5Encode(beanJsonStr + "secCode=" + AccountConfig.QUNAR_ORDER_STATUS_UPDATE_SEC_CODE);
 		if (locSign.equalsIgnoreCase(sign)) {
 			return true;
 		} else {
