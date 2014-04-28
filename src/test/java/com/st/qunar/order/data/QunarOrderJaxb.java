@@ -40,7 +40,7 @@ public class QunarOrderJaxb {
 		result.setStatus("ok");
 
 		Order order = new Order();
-		order.setOrderId("100");
+		order.setOrderId(100L);
 		order.setOrderNo("TTS130812191324904ct01243000");
 		order.setAllPrice("1.00");
 
@@ -84,7 +84,9 @@ public class QunarOrderJaxb {
 		logs.add(log);
 		order.setLogs(logs);
 
-		result.setOrder(order);
+		List<Order> orders = Lists.newArrayList();
+		orders.add(order);
+		result.setOrders(orders);
 
 		String xml = JaxbMapper.toXml(result);
 		System.out.println("Jaxb Object to Xml result:\n" + xml);
@@ -99,7 +101,7 @@ public class QunarOrderJaxb {
 		Result result = JaxbMapper.fromXml(xml, Result.class);
 
 		assertThat(result.getStatus()).isEqualTo("ok");
-		Order order = result.getOrder();
+		Order order = result.getOrders().get(0);
 		assertThat(order.getOrderId()).isEqualTo("100");
 		assertThat(order.getRefund().getRefundNo()).isEqualTo("TTS130812191324904ct01243000");
 		assertThat(order.getRefund().getRefundType()).isEqualTo("线上退款");

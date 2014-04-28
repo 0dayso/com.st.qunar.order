@@ -14,4 +14,10 @@ public interface OrderDao extends PagingAndSortingRepository<Order, Long>, JpaSp
 	// Order findByOrderNo(String orderNo);
 
 	Page<Task> findByStatus(String status, Pageable pageRequest);
+
+	// @Modifying
+	// @Query("update Order order set status=?1 where order.orderNo=?2')
+	void updateStatusByOrderNo(String status, String orderNo);
+
+	Order findByOrderNo(String orderNo);
 }
