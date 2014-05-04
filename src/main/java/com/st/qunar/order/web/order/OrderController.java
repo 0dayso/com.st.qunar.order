@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.st.qunar.order.pojo.OrderStatusUpdateInfo;
 import com.st.qunar.order.pojo.OrderStatusUpdateResp;
-import com.st.qunar.order.service.OrderStatusService;
+import com.st.qunar.order.service.StatusChangeLogService;
 
 /**
  * Task管理的Controller, 使用Restful风格的Urls:
@@ -34,7 +34,7 @@ import com.st.qunar.order.service.OrderStatusService;
 public class OrderController {
 
 	@Autowired
-	OrderStatusService orderStatusService;
+	StatusChangeLogService orderStatusService;
 
 	@RequestMapping(value = "status/update")
 	@ResponseBody

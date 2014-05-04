@@ -79,115 +79,72 @@ public class OrderStatus {
 	public static final String ORDER_STATUS_APPLY_REFUND_OK = "APPLY_REFUND_OK";
 	public static final int ORDER_STATUS_VALUE_APPLY_REFUND_OK = 39;
 
-	@SuppressWarnings("serial")
-	public static final Map<String, Map<String, String>> statusChange = new HashMap() {
+	@SuppressWarnings({ "serial" })
+	public static final Map<String, StatusB2A> statusChange = new HashMap() {
 		{
 			// 订座成功等待支付->支付成功等待出票;用户支付：订单状态从“订座成功等待支付”变成“支付成功等待出票”
-			put("0101", new HashMap() {
-				{
-					put(ORDER_STATUS_BOOK_OK, ORDER_STATUS_PAY_OK);
-				}
-			});
+			put("0101", new StatusB2A(ORDER_STATUS_BOOK_OK, ORDER_STATUS_PAY_OK));
 			// 未出票申请退款->支付成功等待出票;未出票申请退款请求被驳回：订单状态从“未出票申请退款”变为“支付成功等待出票”
-			put("0102", new HashMap() {
-				{
-					put(ORDER_STATUS_APPLY_4_RETURN_PAY, ORDER_STATUS_PAY_OK);
-				}
-			});
+			put("0102", new StatusB2A(ORDER_STATUS_APPLY_4_RETURN_PAY, ORDER_STATUS_PAY_OK));
 			// 订单取消->支付成功等待出票;用户支付：订单状态从“订单取消”变为“支付成功等待出票”
-			put("0103", new HashMap() {
-				{
-					put(ORDER_STATUS_CANCEL_OK, ORDER_STATUS_PAY_OK);
-				}
-			});
+			put("0103", new StatusB2A(ORDER_STATUS_CANCEL_OK, ORDER_STATUS_PAY_OK));
 			// 等待座位确认->支付成功等待出票;用户支付：订单状态从“等待座位确认”变为“支付成功等待出票”
-			put("0104", new HashMap() {
-				{
-					put(ORDER_STATUS_WAIT_CONFIRM, ORDER_STATUS_PAY_OK);
-				}
-			});
+			put("0104", new StatusB2A(ORDER_STATUS_WAIT_CONFIRM, ORDER_STATUS_PAY_OK));
 			// 支付成功等待出票->未出票申请退款;未出票申请退款：订单状态从“支付成功等待出票”变为“未出票申请退款”
-			put("0201", new HashMap() {
-				{
-					put(ORDER_STATUS_PAY_OK, ORDER_STATUS_APPLY_4_RETURN_PAY);
-				}
-			});
+			put("0201", new StatusB2A(ORDER_STATUS_PAY_OK, ORDER_STATUS_APPLY_4_RETURN_PAY));
 			// 出票中->未出票申请退款;未出票申请退款：订单状态从“出票中”变为“未出票申请退款”
-			put("0202", new HashMap() {
-				{
-					put(ORDER_STATUS_TICKET_LOCK, ORDER_STATUS_APPLY_4_RETURN_PAY);
-				}
-			});
+			put("0202", new StatusB2A(ORDER_STATUS_TICKET_LOCK, ORDER_STATUS_APPLY_4_RETURN_PAY));
 			// 出票完成->退票申请中;申请退票：订单状态从“出票完成”变为“退票申请中”
-			put("0301", new HashMap() {
-				{
-					put(ORDER_STATUS_TICKET_OK, ORDER_STATUS_APPLY_REFUNDMENT);
-				}
-			});
+			put("0301", new StatusB2A(ORDER_STATUS_TICKET_OK, ORDER_STATUS_APPLY_REFUNDMENT));
 			// 出票完成->改期申请中;申请改期：订单状态从“出票完成”变为“改期申请中”
-			put("0401", new HashMap() {
-				{
-					put(ORDER_STATUS_TICKET_OK, ORDER_STATUS_APPLY_CHANGE);
-				}
-			});
+			put("0401", new StatusB2A(ORDER_STATUS_TICKET_OK, ORDER_STATUS_APPLY_CHANGE));
 			// 在订单中索取行程单或保险发票（包含快递、自取），并支付，即用户支付快递费
-			put("0501", new HashMap() {
-				{
-				}
-			});
+			put("0501", new StatusB2A("", ""));
 			// 用户未在订单中索取行程单、保险发票，在成单回调页索取并支付，即行程单、保险发票费用不在订单内
-			put("0502", new HashMap() {
-				{
-				}
-			});
+			put("0502", new StatusB2A("", ""));
 			// n->等待座位确认;生成申请订单：订单状态“等待座位确认”
-			put("0601", new HashMap() {
-				{
-					put("ALL", ORDER_STATUS_WAIT_CONFIRM);
-				}
-			});
+			put("0601", new StatusB2A("ALL", ORDER_STATUS_WAIT_CONFIRM));
 			// 订座成功等待支付->等待座位确认;PNR校验失败，请检查PNR状态：订单状态“等待座位确认”
-			put("0602", new HashMap() {
-				{
-					put("ORDER_STATUS_BOOK_OK", ORDER_STATUS_WAIT_CONFIRM);
-				}
-			});
+			put("0602", new StatusB2A("ORDER_STATUS_BOOK_OK", ORDER_STATUS_WAIT_CONFIRM));
 			// 订座成功等待支付->订座成功等待价格确认;Pata异常，需人工确认价格：订单状态“订座成功等待价格确认”
-			put("0701", new HashMap() {
-				{
-					put("ORDER_STATUS_BOOK_OK", ORDER_STATUS_ORDER_SUCCESS_WAIT_4_PRICE_CONFIRME);
-				}
-			});
+			put("0701", new StatusB2A("ORDER_STATUS_BOOK_OK", ORDER_STATUS_ORDER_SUCCESS_WAIT_4_PRICE_CONFIRME));
 			// 支付成功等待出票->支付成功等待出票;%B2B平台%政策查询失败，退出自动出票
-			put("0801", new HashMap() {
-				{
-					put("ORDER_STATUS_PAY_OK", ORDER_STATUS_PAY_OK);
-				}
-			});
+			put("0801", new StatusB2A("ORDER_STATUS_PAY_OK", ORDER_STATUS_PAY_OK));
 			// 支付成功等待出票->支付成功等待出票;%B2B平台%生单失败，退出自动出票
-			put("0802", new HashMap() {
-				{
-					put("ORDER_STATUS_PAY_OK", ORDER_STATUS_PAY_OK);
-				}
-			});
+			put("0802", new StatusB2A("ORDER_STATUS_PAY_OK", ORDER_STATUS_PAY_OK));
 			// 支付成功等待出票->支付成功等待出票;%B2B平台%支付失败，退出自动出票
-			put("0803", new HashMap() {
-				{
-					put("ORDER_STATUS_PAY_OK", ORDER_STATUS_PAY_OK);
-				}
-			});
+			put("0803", new StatusB2A("ORDER_STATUS_PAY_OK", ORDER_STATUS_PAY_OK));
 			// 支付成功等待出票->出票中;%B2B平台%支付异常，无法判断是否支付成功，退出自动出票
-			put("0804", new HashMap() {
-				{
-					put("ORDER_STATUS_PAY_OK", ORDER_STATUS_TICKET_LOCK);
-				}
-			});
+			put("0804", new StatusB2A("ORDER_STATUS_PAY_OK", ORDER_STATUS_TICKET_LOCK));
 			// 超时未出票
-			put("0901", new HashMap() {
-				{
-					put("ALL", "ALL");
-				}
-			});
+			put("0901", new StatusB2A("", ""));
 		}
 	};
+
+	public static class StatusB2A {
+		private String beforeStatus;
+
+		private String afterStatus;
+
+		public String getBeforeStatus() {
+			return beforeStatus;
+		}
+
+		public void setBeforeStatus(String beforeStatus) {
+			this.beforeStatus = beforeStatus;
+		}
+
+		public String getAfterStatus() {
+			return afterStatus;
+		}
+
+		public void setAfterStatus(String afterStatus) {
+			this.afterStatus = afterStatus;
+		}
+
+		public StatusB2A(String beforeStatus, String afterStatus) {
+			this.beforeStatus = beforeStatus;
+			this.afterStatus = afterStatus;
+		}
+	}
 }

@@ -24,6 +24,7 @@ import com.st.qunar.order.repository.OrderDao;
 @Transactional
 public class OrderService {
 
+	@Autowired
 	private OrderDao orderDao;
 
 	public Order getOrder(Long id) {
@@ -78,10 +79,5 @@ public class OrderService {
 		filters.put("status", new SearchFilter("status", Operator.EQ, status));
 		Specification<Order> spec = DynamicSpecifications.bySearchFilter(filters.values(), Order.class);
 		return spec;
-	}
-
-	@Autowired
-	public void setOrderDao(OrderDao orderDao) {
-		this.orderDao = orderDao;
 	}
 }

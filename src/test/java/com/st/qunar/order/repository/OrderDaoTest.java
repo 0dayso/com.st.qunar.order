@@ -38,8 +38,8 @@ public class OrderDaoTest extends SpringTransactionalTestCase {
 	@Autowired
 	private FlightDao flightDao;
 
-	// @Rollback(false)
-	// @Test
+	@Rollback(false)
+	@Test
 	public void addFlight() {
 		Flight flight = new Flight();
 		flight.setCode("MU6837");
@@ -56,8 +56,8 @@ public class OrderDaoTest extends SpringTransactionalTestCase {
 
 	@Test
 	public void getFlight() {
-		Flight flight = flightDao.findOne(8L);
-		assertThat(flight.getArr()).isEqualTo("PVG");
+		Flight flight = flightDao.findOne(72L);
+		assertThat(flight.getArr()).isEqualTo("HGH");
 		assertThat(flight.getOrder().getId()).isEqualTo(28);
 	}
 
@@ -65,6 +65,12 @@ public class OrderDaoTest extends SpringTransactionalTestCase {
 	@Test
 	public void delFlight() {
 		flightDao.delete(8L);
+	}
+
+	@Rollback(false)
+	@Test
+	public void updateStatusByOrderNo() {
+		orderDao.updateStatusByOrderNo("TICKET_OK", "ygz140410144733048");
 	}
 
 	@Rollback(false)

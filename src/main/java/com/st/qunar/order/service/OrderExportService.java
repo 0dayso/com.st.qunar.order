@@ -9,6 +9,7 @@ import org.apache.http.client.fluent.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springside.modules.mapper.JaxbMapper;
 
@@ -20,6 +21,7 @@ import com.st.qunar.order.pojo.AccountConfig;
  * 
  */
 @Component
+@Lazy(value = false)
 public class OrderExportService implements Runnable {
 
 	private static Logger logger = LoggerFactory.getLogger(OrderExportService.class);

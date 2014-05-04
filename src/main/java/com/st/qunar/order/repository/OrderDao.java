@@ -3,6 +3,8 @@ package com.st.qunar.order.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.st.qunar.order.entity.Order;
@@ -15,8 +17,8 @@ public interface OrderDao extends PagingAndSortingRepository<Order, Long>, JpaSp
 
 	Page<Task> findByStatus(String status, Pageable pageRequest);
 
-	// @Modifying
-	// @Query("update Order order set status=?1 where order.orderNo=?2')
+	@Modifying
+	@Query("update Order set status=?1 where orderNo=?2")
 	void updateStatusByOrderNo(String status, String orderNo);
 
 	Order findByOrderNo(String orderNo);
