@@ -103,7 +103,7 @@ public class OrderStatus {
 			// 用户未在订单中索取行程单、保险发票，在成单回调页索取并支付，即行程单、保险发票费用不在订单内
 			put("0502", new StatusB2A("", ""));
 			// n->等待座位确认;生成申请订单：订单状态“等待座位确认”
-			put("0601", new StatusB2A("ALL", ORDER_STATUS_WAIT_CONFIRM));
+			put("0601", new StatusB2A("", ORDER_STATUS_WAIT_CONFIRM));
 			// 订座成功等待支付->等待座位确认;PNR校验失败，请检查PNR状态：订单状态“等待座位确认”
 			put("0602", new StatusB2A("ORDER_STATUS_BOOK_OK", ORDER_STATUS_WAIT_CONFIRM));
 			// 订座成功等待支付->订座成功等待价格确认;Pata异常，需人工确认价格：订单状态“订座成功等待价格确认”

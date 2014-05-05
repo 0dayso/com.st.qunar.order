@@ -3,9 +3,6 @@
  */
 package com.st.qunar.order.pojo;
 
-import java.io.IOException;
-
-import org.apache.http.client.ClientProtocolException;
 import org.springside.modules.mapper.JsonMapper;
 
 import com.st.qunar.order.utilities.MD5;
@@ -77,26 +74,6 @@ public class OrderStatusUpdateInfo {
 		} else {
 			return false;
 		}
-	}
-
-	public static void main(String[] args) throws ClientProtocolException, IOException {
-		JsonMapper mapper = JsonMapper.nonDefaultMapper();
-		OrderStatusUpdateInfo bean = new OrderStatusUpdateInfo();
-		Data data = new Data();
-		data.setChangeCode("0101");
-		data.setOrderDesc("订单状态从“订座成功等待支付”变为“支付成功等到出票”");
-		data.setOrderNo("tes131224171104753");
-		data.setTransactionId("1387876322574");
-		data.setTransactionId("tes1312241711047530602");
-		bean.setData(data);
-		bean.setNotifyType("ORDER");
-		bean.setSign("CAFF1E340C511BBDADAC8BD5CE1F91CE");
-		bean.setVersion("1.0");
-		String beanString = mapper.toJson(bean);
-		System.out.println("Bean:" + beanString);
-		// String exportContent = Request.Post("http://localhost:8080/qunar/order/status/update")
-		// .bodyString(beanString, ContentType.APPLICATION_JSON).execute().returnContent().asString();
-		// System.out.println("exportContent:" + exportContent);
 	}
 
 }

@@ -5,8 +5,13 @@
  *******************************************************************************/
 package com.st.qunar.order.web.order;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,4 +58,15 @@ public class OrderController {
 		resp.setTransactionId(orderStatusUpdateInfo.getData().getTransactionId());
 		return resp;
 	}
+
+	@RequestMapping(value = "export")
+	public void mockQnOrderExportServer(HttpServletResponse resp) throws IOException {
+		resp.setCharacterEncoding("UTF-8");
+		PrintWriter pw = resp.getWriter();
+		String xml = FileUtils.readFileToString(new File("qn前50个订单.xml"));
+		System.out.println("getFile:" + xml);
+		pw.write(xml);
+		pw.close();
+	}
+
 }

@@ -4,6 +4,9 @@ import org.eclipse.jetty.server.Server;
 import org.springside.modules.test.jetty.JettyFactory;
 import org.springside.modules.test.spring.Profiles;
 
+import com.st.qunar.order.service.OrderExportService;
+import com.st.qunar.order.web.util.SpringContextUtil;
+
 public class Main {
 
 	public static final int PORT = 8080;
@@ -23,7 +26,7 @@ public class Main {
 			System.out.println("[HINT] Hit Enter to reload the application quickly");
 
 			// 5分钟请求导入一次
-			// new OrderExportService().run();
+			((OrderExportService) SpringContextUtil.getBean("orderExportService")).run();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(-1);

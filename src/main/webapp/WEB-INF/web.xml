@@ -12,7 +12,7 @@
     <param-value>production</param-value>
   </context-param>
   <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    <listener-class>com.st.qunar.order.web.util.ContextLoaderListener</listener-class>
   </listener>
   <filter>
     <filter-name>encodingFilter</filter-name>

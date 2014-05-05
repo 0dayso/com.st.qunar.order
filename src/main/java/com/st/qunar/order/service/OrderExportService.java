@@ -5,6 +5,7 @@ package com.st.qunar.order.service;
 
 import java.io.IOException;
 
+import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,7 @@ import com.st.qunar.order.pojo.AccountConfig;
  */
 @Component
 @Lazy(value = false)
-public class OrderExportService implements Runnable {
+public class OrderExportService {
 
 	private static Logger logger = LoggerFactory.getLogger(OrderExportService.class);
 
@@ -32,21 +33,33 @@ public class OrderExportService implements Runnable {
 	@Autowired
 	private CommonCountService commonCountService;
 
-	@Override
+	// public OrderExportService(OrderService orderService, CommonCountService commonCountService) {
+	// this.orderService = orderService;
+	// this.commonCountService = commonCountService;
+	// }
+
+	// @Override
 	public void run() {
 		String threadName = Thread.currentThread().getName();
 		System.out.println("import qunar order running" + " ThreadName:" + threadName);
 		while (true) {
 			try {
 				// 增量导出
-				String reqUrl = AccountConfig.QUNAR_ORDER_EXPORT_URL
-						+ AccountConfig.QUNAR_ORDER_EXPORT_USER_PASS
-						+ "&type=incr&lastId="
-						+ commonCountService
-								.getCommonCountByTypeName(CommonCountService.COMM_COUNT_QN_ORDER_INCR_EXP_LAS_ID);
-				String exportContent = Request.Post(reqUrl).execute().returnContent().asString();
+				byte[] exportContentBytes = Request
+						.Post(AccountConfig.QUNAR_ORDER_EXPORT_URL)
+						.bodyForm(
+								Form.form()
+										.add("use", AccountConfig.QUNAR_ORDER_EXPORT_USER_VALUE)
+										.add("pass", AccountConfig.QUNAR_ORDER_EXPORT_PASS_VALUE)
+										.add("type", "incr")
+										.add("lastId",
+												commonCountService.getCommonCountByTypeName(
+														CommonCountService.COMM_COUNT_QN_ORDER_INCR_EXP_LAS_ID)
+														.getCount()
+														+ "").build()).execute().returnContent().asBytes();
+
 				// 导出结果xml转为对象
-				Result result = JaxbMapper.fromXml(exportContent, Result.class);
+				Result result = JaxbMapper.fromXml(new String(exportContentBytes, "UTF-8"), Result.class);
 				if (!result.getStatus().equals("ok")) {
 					String exErrContent = result.getMsg().getContent();
 					logger.error("export content error:", exErrContent);
@@ -55,6 +68,7 @@ public class OrderExportService implements Runnable {
 					Long lastId = result.getOrders().get(result.getOrders().size() - 1).getOrderId();
 					commonCountService.updateCountByTypeName(CommonCountService.COMM_COUNT_QN_ORDER_INCR_EXP_LAS_ID,
 							lastId);
+					logger.info("export ok:" + result);
 				}
 			} catch (IOException e) {
 				logger.error("export post request error", e);
