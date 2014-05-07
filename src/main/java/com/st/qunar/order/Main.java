@@ -9,7 +9,7 @@ import com.st.qunar.order.web.util.SpringContextUtil;
 
 public class Main {
 
-	public static final int PORT = 8080;
+	public static final int PORT = 9000;
 	public static final String CONTEXT = "/qunar";
 
 	public static void main(String[] args) throws Exception {
@@ -25,6 +25,7 @@ public class Main {
 			System.out.println("[INFO] Server running at http://localhost:" + PORT + CONTEXT);
 			System.out.println("[HINT] Hit Enter to reload the application quickly");
 
+			Thread.sleep(10 * 1000);
 			// 5分钟请求导入一次
 			((OrderExportService) SpringContextUtil.getBean("orderExportService")).run();
 		} catch (Exception e) {

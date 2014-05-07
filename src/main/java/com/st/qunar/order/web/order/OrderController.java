@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +39,7 @@ import com.st.qunar.order.service.StatusChangeLogService;
 @Controller
 @RequestMapping(value = "/order")
 public class OrderController {
+	private static Logger logger = LoggerFactory.getLogger(OrderController.class);
 
 	@Autowired
 	StatusChangeLogService orderStatusService;
@@ -56,6 +59,8 @@ public class OrderController {
 			resp.setResult("FAILED");
 		}
 		resp.setTransactionId(orderStatusUpdateInfo.getData().getTransactionId());
+		logger.warn("order status update req:" + orderStatusUpdateInfo.toString());
+		logger.warn("order status update resp:" + resp.toString());
 		return resp;
 	}
 

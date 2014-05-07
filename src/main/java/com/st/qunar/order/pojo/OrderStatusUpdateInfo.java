@@ -3,6 +3,7 @@
  */
 package com.st.qunar.order.pojo;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springside.modules.mapper.JsonMapper;
 
 import com.st.qunar.order.utilities.MD5;
@@ -76,4 +77,8 @@ public class OrderStatusUpdateInfo {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

@@ -68,7 +68,7 @@ public class OrderExportService {
 					Long lastId = result.getOrders().get(result.getOrders().size() - 1).getOrderId();
 					commonCountService.updateCountByTypeName(CommonCountService.COMM_COUNT_QN_ORDER_INCR_EXP_LAS_ID,
 							lastId);
-					logger.info("export ok:" + result);
+					logger.warn("export ok:\n" + result);
 				}
 			} catch (IOException e) {
 				logger.error("export post request error", e);
