@@ -63,7 +63,7 @@ public class StatusChangeLogServiceTest extends SpringTransactionalTestCase {
 		String beanString = mapper.toJson(bean);
 
 		System.out.println("Bean:" + beanString);
-		String exportContent = Request.Post("http://localhost:8080/qunar/order/status/update")
+		String exportContent = Request.Post("http://42.121.4.104:9000/qunar/order/status/update")
 				.bodyString(beanString, ContentType.APPLICATION_JSON).execute().returnContent().asString();
 		System.out.println("exportContent:" + exportContent);
 	}

@@ -28,9 +28,7 @@ import com.st.qunar.order.entity.Result;
 public class QunarOrderJaxb {
 
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
 		QunarOrderJaxb qo = new QunarOrderJaxb();
-		// String xml = qo.objectToXml();
 		qo.xmlToObject();
 	}
 
@@ -76,7 +74,7 @@ public class QunarOrderJaxb {
 		insurance.setInsuranceNo("1100001");
 		List<Insurance> insurances = Lists.newArrayList();
 		insurances.add(insurance);
-		order.setInsurances(insurances);
+		passenger.setInsurances(insurances);
 
 		Log log = new Log();
 		log.setOperator("用户");
@@ -96,19 +94,19 @@ public class QunarOrderJaxb {
 
 	@Test
 	public void xmlToObject() throws IOException {
-		String xml = FileUtils.readFileToString(new File("qnOrder.xml"));
+		String xml = FileUtils.readFileToString(new File("qnOrder.xml"));// qn前50个订单.xml qnOrder.xml
 		System.out.println(xml);
 		Result result = JaxbMapper.fromXml(xml, Result.class);
 
 		assertThat(result.getStatus()).isEqualTo("ok");
 		Order order = result.getOrders().get(0);
-		assertThat(order.getOrderId()).isEqualTo("100");
+		assertThat(order.getOrderId()).isEqualTo(300L);
 		assertThat(order.getRefund().getRefundNo()).isEqualTo("TTS130812191324904ct01243000");
 		assertThat(order.getRefund().getRefundType()).isEqualTo("线上退款");
 		assertThat(order.getPurchaseOrderInfo().getPurchansePrice()).isEqualTo("0.00");
 		assertThat(order.getFlights().get(0).getCode()).isEqualTo("MU6837");
 		assertThat(order.getPassengers().get(0).getName()).isEqualTo("蒋大钧");
-		assertThat(order.getInsurances().get(0).getInsuranceNo()).isEqualTo("1100001");
+		assertThat(order.getPassengers().get(0).getInsurances().get(0).getInsuranceNo()).isEqualTo("1100001");
 		assertThat(order.getLogs().get(0).getOperator()).isEqualTo("用户");
 
 	}

@@ -12,8 +12,8 @@
 		<flight code="MU6837" cabin="E" ccabin="Y" dep="CTU" arr="PVG" depDay="2013-09-16" depTime="17:40" arrTime="20:25"
 			realCode="" />
 		<passenger name="蒋大钧" ageType="0" cardType="NI" price="783.0" priceType="成人" cardNum="310109198308273550"
-			eticketNum="" insuranceCount="1" bxSource="百年 9 / 19 人寿保险股份有限公司" bxName="百年交通工具意外伤害保险" />
-		<insurance insuranceNo="1100001" bxFlight="第一程" bxStatus="已出保险" />
+			eticketNum="" insuranceCount="1" bxSource="百年 9 / 19 人寿保险股份有限公司" bxName="百年交通工具意外伤害保险"><insurance insuranceNo="1100001" bxFlight="第一程" bxStatus="已出保险" /></passenger>
 		<log operator="用户" time="2013-07-25 20:47:04.0" action="将订单由【】修改为【订座成功等待支付】原因为生成订单" />
 	</order>
 </result>
+

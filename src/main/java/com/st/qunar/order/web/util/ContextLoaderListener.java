@@ -7,6 +7,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.st.qunar.order.service.OrderExportService;
+
 @Component
 public class ContextLoaderListener extends org.springframework.web.context.ContextLoaderListener {
 	@Override
@@ -15,5 +17,7 @@ public class ContextLoaderListener extends org.springframework.web.context.Conte
 		super.contextInitialized(event);
 		ApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(context);
 		SpringContextUtil.setApplicationContext(ctx);
+		// 5分钟请求导入一次
+		((OrderExportService) ctx.getBean("orderExportService")).run();
 	}
 }

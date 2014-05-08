@@ -1,11 +1,18 @@
 package com.st.qunar.order.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author kxhu
@@ -34,6 +41,9 @@ public class Passenger extends IdEntity {
 	private String bxSource;
 	// 保单所属保险产品名字
 	private String bxName;
+
+	// 乘机人有几份保险有几条
+	private List<Insurance> insurances = Lists.newArrayList();
 
 	private Order order;
 
@@ -124,6 +134,19 @@ public class Passenger extends IdEntity {
 
 	public void setBxName(String bxName) {
 		this.bxName = bxName;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "passenger")
+	@XmlElement(name = "insurance")
+	public List<Insurance> getInsurances() {
+		return insurances;
+	}
+
+	public void setInsurances(List<Insurance> insurances) {
+		for (Insurance insurance : insurances) {
+			insurance.setPassenger(this);
+		}
+		this.insurances = insurances;
 	}
 
 	@XmlTransient

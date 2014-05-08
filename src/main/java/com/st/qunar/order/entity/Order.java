@@ -107,8 +107,6 @@ public class Order extends IdEntity {
 	private PurchaseOrderInfo purchaseOrderInfo;
 	// 几个航段会有几条flight
 	private List<Flight> flights = Lists.newArrayList();
-	// 乘机人有几份保险有几条
-	private List<Insurance> insurances = Lists.newArrayList();
 
 	private List<Log> logs = Lists.newArrayList();
 
@@ -505,19 +503,6 @@ public class Order extends IdEntity {
 			passenger.setOrder(this);
 		}
 		this.passengers = passengers;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-	@XmlElement(name = "insurance")
-	public List<Insurance> getInsurances() {
-		return insurances;
-	}
-
-	public void setInsurances(List<Insurance> insurances) {
-		for (Insurance insurance : insurances) {
-			insurance.setOrder(this);
-		}
-		this.insurances = insurances;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order")

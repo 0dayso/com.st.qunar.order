@@ -49,7 +49,7 @@ public class OrderExportService {
 						.Post(AccountConfig.QUNAR_ORDER_EXPORT_URL)
 						.bodyForm(
 								Form.form()
-										.add("use", AccountConfig.QUNAR_ORDER_EXPORT_USER_VALUE)
+										.add("user", AccountConfig.QUNAR_ORDER_EXPORT_USER_VALUE)
 										.add("pass", AccountConfig.QUNAR_ORDER_EXPORT_PASS_VALUE)
 										.add("type", "incr")
 										.add("lastId",
@@ -57,12 +57,11 @@ public class OrderExportService {
 														CommonCountService.COMM_COUNT_QN_ORDER_INCR_EXP_LAS_ID)
 														.getCount()
 														+ "").build()).execute().returnContent().asBytes();
-
+				logger.warn("export resp:\n" + new String(exportContentBytes, "UTF-8"));
 				// 导出结果xml转为对象
 				Result result = JaxbMapper.fromXml(new String(exportContentBytes, "UTF-8"), Result.class);
 				if (!result.getStatus().equals("ok")) {
-					String exErrContent = result.getMsg().getContent();
-					logger.error("export content error:", exErrContent);
+					logger.error("export content error:", result.getMsg().getContent());
 				} else {
 					orderService.saveOrders(result.getOrders());
 					Long lastId = result.getOrders().get(result.getOrders().size() - 1).getOrderId();

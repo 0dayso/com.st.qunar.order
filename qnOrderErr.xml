@@ -1,3 +1,2 @@
-<result status="error">
-	<msg content="导出出错了" />
-</result>
+<?xml version='1.0' encoding='UTF-8'?>
+<result status="error"><msg content="user/pass error" /></result>

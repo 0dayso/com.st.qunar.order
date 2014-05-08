@@ -2,11 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.springside.examples</groupId>
-	<artifactId>quickstart</artifactId>
-	<version>4.2.2.GA</version>
-	<packaging>war</packaging>
-	<name>Springside :: Example :: QuickStart</name>
+	<groupId>com.st.qunar.order</groupId>
+	<artifactId>qnOrder</artifactId>
+	<version>1.0.0.GA</version>
+	<name>st :: qunar :: order</name>
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
@@ -284,7 +283,18 @@
 		</dependency>
 		<!-- OTHER TOOLS end -->
 		
-		
+		<dependency>
+      		<groupId>org.eclipse.jetty.aggregate</groupId>
+      		<artifactId>jetty-webapp</artifactId>
+      		<version>7.6.14.v20131031</version>
+      	<scope>provided</scope>
+    	</dependency>
+    	<dependency>
+      		<groupId>org.eclipse.jetty</groupId>
+      		<artifactId>jetty-jsp</artifactId>
+     		<version>7.6.14.v20131031</version>
+      		<scope>provided</scope>
+    	</dependency>
 		<!-- TEST begin -->
 		
 		
@@ -530,7 +540,6 @@
 	</build>
 
 	<profiles>
-		
 		<!--打包可执行war包, 基于Jetty -->
 		<profile>
 			<id>standalone</id>
@@ -551,7 +560,7 @@
 									</descriptors>
 									<archive>
 										<manifest>
-											<mainClass>com.st.qunar.order.Main</mainClass>
+                         					<mainClass>com.st.qunar.order.Main</mainClass>
 										</manifest>
 									</archive>
 								</configuration>
@@ -562,4 +571,5 @@
 			</build>
 		</profile>
 	</profiles>
+	<packaging>war</packaging>
 </project>

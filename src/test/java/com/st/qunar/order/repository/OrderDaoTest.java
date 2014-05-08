@@ -172,8 +172,8 @@ public class OrderDaoTest extends SpringTransactionalTestCase {
 		insurance.setInsuranceNo("1100001");
 		insurance.setBxFlight("第一程");
 		insurance.setBxStatus("已出保险");
-		insurance.setOrder(order);
-		order.getInsurances().add(insurance);
+		insurance.setPassenger(passenger);
+		passenger.getInsurances().add(insurance);
 
 		Log log = new Log();
 		log.setOperator("用户");
@@ -207,7 +207,7 @@ public class OrderDaoTest extends SpringTransactionalTestCase {
 		Order order = orderDao.findOne(28l);
 		assertThat(order.getOrderNo()).isEqualTo("1");
 		assertThat(order.getFlights().get(0).getArr()).isEqualTo("2");
-		assertThat(order.getInsurances().get(0).getBxFlight()).isEqualTo("3");
+		assertThat(order.getPassengers().get(0).getInsurances().get(0).getBxFlight()).isEqualTo("3");
 		assertThat(order.getLogs().get(0).getAction()).isEqualTo("4");
 		assertThat(order.getPassengers().get(0).getAgeType()).isEqualTo("5");
 	}

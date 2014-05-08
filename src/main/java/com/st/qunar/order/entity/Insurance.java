@@ -21,7 +21,7 @@ public class Insurance extends IdEntity {
 	// 保险状态：待支付,出保中,已出保险,保单取消等待退款,退保成功等待退款,退款完成,已拆分
 	private String bxStatus;
 
-	private Order order;
+	private Passenger passenger;
 
 	@XmlAttribute
 	public String getInsuranceNo() {
@@ -52,12 +52,12 @@ public class Insurance extends IdEntity {
 
 	@XmlTransient
 	@ManyToOne
-	@JoinColumn(name = "order_id")
-	public Order getOrder() {
-		return order;
+	@JoinColumn(name = "passenger_id")
+	public Passenger getPassenger() {
+		return passenger;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setPassenger(Passenger passenger) {
+		this.passenger = passenger;
 	}
 }

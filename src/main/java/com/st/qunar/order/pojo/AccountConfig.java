@@ -8,10 +8,10 @@ package com.st.qunar.order.pojo;
  * 
  */
 public class AccountConfig {
-	// public static final String QUNAR_ORDER_EXPORT_URL = "http://ygz.trade.qunar.com/tts/interface/new/orderexport";
-	public static final String QUNAR_ORDER_EXPORT_URL = "http://localhost:8080/qunar/order/export";
+	public static final String QUNAR_ORDER_EXPORT_URL = "http://ygz.trade.qunar.com/tts/interface/new/orderexport";
+	// public static final String QUNAR_ORDER_EXPORT_URL = "http://localhost:8080/qunar/order/export";
 
-	public static final String QUNAR_ORDER_EXPORT_USER_PARA = "use";
+	public static final String QUNAR_ORDER_EXPORT_USER_PARA = "user";
 	public static final String QUNAR_ORDER_EXPORT_USER_VALUE = "ygQunarTtsOrder";
 
 	public static final String QUNAR_ORDER_EXPORT_PASS_PARA = "pass";
