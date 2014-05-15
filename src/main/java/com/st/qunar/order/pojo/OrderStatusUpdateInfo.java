@@ -3,10 +3,9 @@
  */
 package com.st.qunar.order.pojo;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springside.modules.mapper.JsonMapper;
-
-import com.st.qunar.order.utilities.MD5;
 
 /**
  * @author kxhu
@@ -69,7 +68,10 @@ public class OrderStatusUpdateInfo {
 
 	public boolean signAssertSucc() {
 		String beanJsonStr = JsonMapper.nonDefaultMapper().toJson(this.getData());
-		String locSign = MD5.MD5Encode(beanJsonStr + "secCode=" + AccountConfig.QUNAR_ORDER_STATUS_UPDATE_SEC_CODE);
+		beanJsonStr = beanJsonStr.replaceAll("time\":\"", "time\":");
+		beanJsonStr = beanJsonStr.replaceAll("\",\"transactionId", ",\"transactionId");
+		String locSign = DigestUtils
+				.md5Hex(beanJsonStr + "secCode=" + AccountConfig.QUNAR_ORDER_STATUS_UPDATE_SEC_CODE).toUpperCase();
 		if (locSign.equalsIgnoreCase(sign)) {
 			return true;
 		} else {

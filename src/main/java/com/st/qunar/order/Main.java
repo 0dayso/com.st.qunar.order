@@ -16,7 +16,9 @@ public class Main {
 		Server server = createServer(CONTEXT, PORT);
 		try {
 			server.start();
+			System.out.println("jetty server start");
 			server.join();
+			System.out.println("jetty server join");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(100);
@@ -39,7 +41,6 @@ public class Main {
 
 		// 设置work dir,war包将解压到该目录，jsp编译后的文件也将放入其中。
 		String currentDir = new File(location.getPath()).getParent();
-		System.out.println(currentDir);
 		File workDir = new File(currentDir, "work");
 		context.setTempDirectory(workDir);
 

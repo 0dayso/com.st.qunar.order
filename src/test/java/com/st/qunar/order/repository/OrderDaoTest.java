@@ -75,6 +75,16 @@ public class OrderDaoTest extends SpringTransactionalTestCase {
 
 	@Rollback(false)
 	@Test
+	public void updateOrderBy() {
+		Order dbOrder = orderDao.findOne(557L);
+		System.out.println("getOrderNo:" + dbOrder.getOrderNo());
+		dbOrder.setId(556L);
+		System.out.println("id:" + dbOrder.getId());
+		orderDao.save(dbOrder);
+	}
+
+	@Rollback(false)
+	@Test
 	public void delOrder() {
 		orderDao.delete(29L);
 	}

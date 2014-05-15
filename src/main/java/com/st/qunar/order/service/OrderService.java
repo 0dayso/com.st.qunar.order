@@ -37,6 +37,10 @@ public class OrderService {
 
 	public void saveOrders(List<Order> orders) {
 		for (Order order : orders) {
+			Order dbOrder = orderDao.findByOrderNo(order.getOrderNo());
+			if ((dbOrder) != null) {
+				continue;
+			}
 			orderDao.save(order);
 		}
 	}

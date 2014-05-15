@@ -20,14 +20,32 @@ public class StatusChangeLogService extends OrderService {
 	@Autowired
 	StatusChangeLogDao statusChangeLogDao;
 
+	@Autowired
+	OrderExportService orderExportService;
+
 	public void updateStatusByOrderNo(String status, String orderNo) {
 		orderDao.updateStatusByOrderNo(status, orderNo);
 	}
 
 	/*
+	 * 先判断订单是否存在本地库，如果在开始更新数据库对应订单的状态；如果不在通过精确导出该订单保存到数据库
 	 * 根据订单订单状态变更码做相应逻辑处理
 	 */
 	public void updateOrderStatus(OrderStatusUpdateInfo orderStatusUpdateInfo) {
+		String orderNo = orderStatusUpdateInfo.getData().getOrderNo();
+		Order order = orderDao.findByOrderNo(orderNo);
+		if (order == null) {
+			order = orderExportService.exactExport(orderNo);
+			orderDao.save(order);
+		}
+		updateOrderStatusInfo(orderStatusUpdateInfo);
+	}
+
+	/*
+	 * 先判断订单是否存在本地库，如果在开始更新数据库对应订单的状态；如果不在通过精确导出该订单保存到数据库
+	 * 根据订单订单状态变更码做相应逻辑处理
+	 */
+	public void updateOrderStatusInfo(OrderStatusUpdateInfo orderStatusUpdateInfo) {
 		StatusChangeLog orderStatusUpdate = new StatusChangeLog();
 		orderStatusUpdate.setNotifyType(orderStatusUpdateInfo.getNotifyType());
 		orderStatusUpdate.setSign(orderStatusUpdateInfo.getSign());
@@ -40,7 +58,6 @@ public class StatusChangeLogService extends OrderService {
 
 		String changeCode = orderStatusUpdateInfo.getData().getChangeCode();
 		String orderNo = orderStatusUpdateInfo.getData().getOrderNo();
-		Order order = orderDao.findByOrderNo(orderNo);
 		if (changeCode.equals("0101") || changeCode.equals("0102") || changeCode.equals("0103")
 				|| changeCode.equals("0104") || changeCode.equals("0201") || changeCode.equals("0202")
 				|| changeCode.equals("0301") || changeCode.equals("0401") || changeCode.equals("0601")

@@ -18,10 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.st.qunar.order.pojo.OrderStatusUpdateInfo;
 import com.st.qunar.order.pojo.OrderStatusUpdateResp;
+import com.st.qunar.order.service.OrderExportService;
 import com.st.qunar.order.service.StatusChangeLogService;
 
 /**
@@ -44,6 +46,9 @@ public class OrderController {
 	@Autowired
 	StatusChangeLogService orderStatusService;
 
+	@Autowired
+	OrderExportService orderExportService;
+
 	@RequestMapping(value = "status/update")
 	@ResponseBody
 	public OrderStatusUpdateResp statusUpdate(@RequestBody OrderStatusUpdateInfo orderStatusUpdateInfo)
@@ -52,7 +57,7 @@ public class OrderController {
 		if (orderStatusUpdateInfo.signAssertSucc()) {
 			resp.setErrMsg("signsucc");
 			resp.setResult("SUCCESS");
-			// 签名验证成功开始更新数据库对应订单的状态
+			// 签名验证成功:先判断订单是否存在本地库，如果在开始更新数据库对应订单的状态；如果不在通过精确导出该订单保存到数据库
 			orderStatusService.updateOrderStatus(orderStatusUpdateInfo);
 		} else {
 			resp.setErrMsg("signfail");
@@ -62,6 +67,20 @@ public class OrderController {
 		logger.warn("order status update req:" + orderStatusUpdateInfo.toString());
 		logger.warn("order status update resp:" + resp.toString());
 		return resp;
+	}
+
+	// http://42.121.4.104:9000/qunar/order/allExport?key=kxhu
+	@RequestMapping(value = "allExport")
+	public void allExport(@RequestParam String key, HttpServletResponse resp) throws IOException {
+		resp.setCharacterEncoding("UTF-8");
+		PrintWriter pw = resp.getWriter();
+		if (key.equalsIgnoreCase("kxhu")) {
+			orderExportService.allExport();
+			pw.write("allexport");
+		} else {
+			pw.write("error key all export");
+		}
+		pw.close();
 	}
 
 	@RequestMapping(value = "export")
