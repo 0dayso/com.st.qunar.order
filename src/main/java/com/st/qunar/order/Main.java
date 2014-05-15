@@ -25,6 +25,7 @@ public class Main {
 		}
 	}
 
+	// jetty server run
 	private static Server createServer(String contextPath, int port) {
 		// use Eclipse JDT compiler
 		System.setProperty("org.apache.jasper.compiler.disablejsr199", "true");
